@@ -86,8 +86,21 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased relative">
     
+    <!-- ปุ่ม Workspace แบบลอยค้างมุมขวาบน -->
+    <a href="https://praetinee.github.io/JanWorkspace/" 
+       class="fixed top-6 right-6 z-[9999] flex items-center gap-2 bg-[#f8fafc] border border-gray-200 text-gray-700 px-4 py-2 rounded-xl shadow-sm hover:bg-gray-100 hover:text-gray-900 transition-all font-medium no-underline print:hidden cursor-pointer" 
+       style="font-family: 'Sarabun', sans-serif;"
+       data-html2canvas-ignore="true">
+        <!-- ไอคอนบ้านคล้ายในรูป -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span class="mt-[2px]">Workspace</span>
+    </a>
+
     <!-- Wrapper แช่แข็งหน้าจอให้กว้าง 1280px เสมอ (เลื่อนและซูมได้แบบรูปภาพ) -->
     <div style="width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;">
         <div style="min-width: 1280px; width: 1280px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-radius: 12px;">
