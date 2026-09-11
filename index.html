@@ -79,12 +79,14 @@
 </head>
 <body class="antialiased relative">
     
+    <!-- ปุ่มสลับ Dark Mode -->
     <button onclick="toggleDarkMode()" class="fixed top-6 right-[170px] z-[9999] flex items-center justify-center bg-white border border-gray-200 text-gray-700 w-10 h-10 rounded-full shadow-sm hover:bg-gray-100 hover:text-gray-900 transition-all print:hidden cursor-pointer" data-html2canvas-ignore="true">
         <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
     </button>
 
+    <!-- ปุ่ม Workspace -->
     <a href="https://praetinee.github.io/JanWorkspace/" class="fixed top-6 right-6 z-[9999] flex items-center gap-2 bg-[#f8fafc] border border-gray-200 text-gray-700 px-4 py-2 rounded-xl shadow-sm hover:bg-gray-100 hover:text-gray-900 transition-all font-medium no-underline print:hidden cursor-pointer" style="font-family: 'Sarabun', sans-serif;" data-html2canvas-ignore="true">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -268,7 +270,7 @@
                                 <div class="bg-orange-200 border-[3px] border-orange-400 rounded-[1.5rem] py-2 px-1 shadow-sm text-center w-full z-10 h-[60px] flex items-center justify-center shrink-0">
                                     <p class="text-orange-900 font-bold text-[13px] leading-tight card-text baseline-fix">เข้าข่าย<br>อาการเล็กน้อย<br>/ปานกลาง</p>
                                 </div>
-                                <!-- เติมเส้นแนวตั้งและให้ยืด (flex-grow) ลงมาจนสุดขอบล่างของแถว -->
+                                <!-- เติมเส้นให้ยืดลงมา -->
                                 <div class="line-v flex-grow mt-1 mb-0 w-[3px]"></div>
                             </div>
                             
@@ -292,7 +294,6 @@
                             </div>
                         </div>
 
-                        <!-- ลากต่อลงตรงกลาง คลินิกมลพิษ -->
                         <div class="line-v h-14 relative z-0"></div>
                         <div class="arrow-down relative z-0"></div>
 
@@ -434,6 +435,7 @@
             const btn = document.querySelector('button[onclick="downloadImage()"]');
             const originalContent = btn.innerHTML;
             btn.innerHTML = 'กำลังประมวลผล...';
+            
             await document.fonts.ready;
             
             const overlay = document.createElement('div');
@@ -446,35 +448,71 @@
             `;
             document.body.appendChild(overlay);
             
+            const panContainer = document.getElementById('pan-container');
             const canvasBox = document.querySelector('#pan-container > div');
-            const currentBg = canvasBox.style.backgroundColor;
-            canvasBox.style.backgroundColor = '#ffffff';
+            const captureArea = document.getElementById('capture-area');
 
-            window.scrollTo(0, 0); drawFlowLines();
+            const currentBg = canvasBox.style.backgroundColor;
+            const oldScrollLeft = panContainer.scrollLeft;
+            const oldScrollTop = panContainer.scrollTop;
+            
+            canvasBox.style.backgroundColor = '#ffffff';
+            panContainer.scrollLeft = 0;
+            panContainer.scrollTop = 0;
+            window.scrollTo(0, 0); 
+
+            const noAnimStyle = document.createElement('style');
+            noAnimStyle.innerHTML = `.pop-in, .draw-fade { opacity: 1 !important; animation: none !important; transform: none !important; }`;
+            document.head.appendChild(noAnimStyle);
+
+            drawFlowLines(true);
             
             setTimeout(() => {
-                html2canvas(document.getElementById('capture-area'), {
-                    scale: 3, backgroundColor: "#ffffff", useCORS: true, scrollY: 0, windowWidth: 1280, logging: false
+                html2canvas(captureArea, {
+                    scale: 3, 
+                    backgroundColor: "#ffffff", 
+                    useCORS: true, 
+                    scrollX: 0, 
+                    scrollY: 0, 
+                    windowWidth: 1280, 
+                    logging: false
                 }).then(canvas => {
-                    document.body.removeChild(overlay); canvasBox.style.backgroundColor = currentBg;
-                    const link = document.createElement('a'); link.download = 'PM25_Flow.png'; link.href = canvas.toDataURL('image/png', 1.0); link.click();
+                    document.body.removeChild(overlay); 
+                    document.head.removeChild(noAnimStyle);
+                    canvasBox.style.backgroundColor = currentBg;
+                    panContainer.scrollLeft = oldScrollLeft;
+                    panContainer.scrollTop = oldScrollTop;
+                    
+                    const link = document.createElement('a'); 
+                    link.download = 'PM25_Flow.png'; 
+                    link.href = canvas.toDataURL('image/png', 1.0); 
+                    link.click();
                     btn.innerHTML = originalContent;
                 }).catch(err => {
-                    console.error(err); document.body.removeChild(overlay); canvasBox.style.backgroundColor = currentBg;
-                    btn.innerHTML = originalContent; alert("เกิดข้อผิดพลาดในการบันทึกรูปภาพ กรุณาลองใหม่อีกครั้ง");
+                    console.error(err); 
+                    document.body.removeChild(overlay); 
+                    if(document.head.contains(noAnimStyle)) document.head.removeChild(noAnimStyle);
+                    canvasBox.style.backgroundColor = currentBg;
+                    panContainer.scrollLeft = oldScrollLeft;
+                    panContainer.scrollTop = oldScrollTop;
+                    btn.innerHTML = originalContent; 
+                    alert("เกิดข้อผิดพลาดในการบันทึกรูปภาพ กรุณาลองใหม่อีกครั้ง");
                 });
-            }, 300); 
+            }, 500); 
         }
 
-        function drawFlowLines() {
+        function drawFlowLines(isCapture = false) {
             const linesContainer = document.getElementById('dynamic-lines-container');
             const container = document.getElementById('main-flow-container');
+            
             if(linesContainer && container) {
                 const contRect = container.getBoundingClientRect();
                 const getRelRect = (el) => {
                     const rect = el.getBoundingClientRect();
                     return { top: rect.top - contRect.top, bottom: rect.bottom - contRect.top, left: rect.left - contRect.left, right: rect.right - contRect.left, width: rect.width, height: rect.height };
                 };
+
+                const getAnim = (delay) => isCapture ? 'opacity: 1;' : `opacity: 0; animation: popInAnim 0.5s ease ${delay}s forwards;`;
 
                 const redSrc = document.getElementById('red-source');
                 const redTgt = document.getElementById('red-target');
@@ -485,11 +523,11 @@
                     const rEndX = rTgtRect.left + (rTgtRect.width / 2); const rEndY = rTgtRect.top - 4; 
                     const gutterX = suspectRect.right + 30; const safeY = rEndY - 25;
                     
-                    document.getElementById('red-seg-1').style.cssText = `left: ${rStartX}px; top: ${rStartY - 2}px; width: ${gutterX - rStartX}px; height: 4px; opacity: 0; animation: popInAnim 0.5s ease 0.6s forwards;`;
-                    document.getElementById('red-seg-2').style.cssText = `left: ${gutterX - 2}px; top: ${Math.min(rStartY, safeY) - 2}px; width: 4px; height: ${Math.abs(safeY - rStartY) + 4}px; opacity: 0; animation: popInAnim 0.5s ease 0.7s forwards;`;
-                    document.getElementById('red-seg-3').style.cssText = `left: ${Math.min(gutterX, rEndX) - 2}px; top: ${safeY - 2}px; width: ${Math.abs(rEndX - gutterX) + 4}px; height: 4px; opacity: 0; animation: popInAnim 0.5s ease 0.8s forwards;`;
-                    document.getElementById('red-seg-4').style.cssText = `left: ${rEndX - 2}px; top: ${safeY - 2}px; width: 4px; height: ${Math.max(0, (rEndY - 10) - (safeY - 2))}px; opacity: 0; animation: popInAnim 0.5s ease 0.9s forwards;`;
-                    document.getElementById('red-arrow').style.cssText = `left: ${rEndX - 6}px; top: ${rEndY - 10}px; opacity: 0; animation: popInAnim 0.5s ease 1s forwards;`;
+                    document.getElementById('red-seg-1').style.cssText = `left: ${rStartX}px; top: ${rStartY - 2}px; width: ${gutterX - rStartX}px; height: 4px; ${getAnim(0.6)}`;
+                    document.getElementById('red-seg-2').style.cssText = `left: ${gutterX - 2}px; top: ${Math.min(rStartY, safeY) - 2}px; width: 4px; height: ${Math.abs(safeY - rStartY) + 4}px; ${getAnim(0.7)}`;
+                    document.getElementById('red-seg-3').style.cssText = `left: ${Math.min(gutterX, rEndX) - 2}px; top: ${safeY - 2}px; width: ${Math.abs(rEndX - gutterX) + 4}px; height: 4px; ${getAnim(0.8)}`;
+                    document.getElementById('red-seg-4').style.cssText = `left: ${rEndX - 2}px; top: ${safeY - 2}px; width: 4px; height: ${Math.max(0, (rEndY - 10) - (safeY - 2))}px; ${getAnim(0.9)}`;
+                    document.getElementById('red-arrow').style.cssText = `left: ${rEndX - 6}px; top: ${rEndY - 10}px; ${getAnim(1.0)}`;
                 }
 
                 const referBox = document.getElementById('er-refer-box');
@@ -501,15 +539,16 @@
                     const pEndX = dcRect.right; const pEndY = dcRect.top + (dcRect.height / 2);
                     const pGutterX = rightColRect.right + 30; 
                     
-                    document.getElementById('purp-seg-1').style.cssText = `left: ${pStartX}px; top: ${pStartY - 2}px; width: ${pGutterX - pStartX}px; height: 0px; opacity: 0; animation: popInAnim 0.5s ease 0.6s forwards;`;
-                    document.getElementById('purp-seg-2').style.cssText = `left: ${pGutterX - 2}px; top: ${pStartY - 2}px; width: 0px; height: ${pEndY - pStartY + 4}px; opacity: 0; animation: popInAnim 0.5s ease 0.7s forwards;`;
-                    document.getElementById('purp-seg-3').style.cssText = `left: ${pEndX + 12}px; top: ${pEndY - 2}px; width: ${pGutterX - pEndX - 12}px; height: 0px; opacity: 0; animation: popInAnim 0.5s ease 0.8s forwards;`;
-                    document.getElementById('purp-arrow').style.cssText = `left: ${pEndX + 2}px; top: ${pEndY - 6}px; opacity: 0; animation: popInAnim 0.5s ease 0.9s forwards;`;
+                    document.getElementById('purp-seg-1').style.cssText = `left: ${pStartX}px; top: ${pStartY - 2}px; width: ${pGutterX - pStartX}px; height: 0px; ${getAnim(0.6)}`;
+                    document.getElementById('purp-seg-2').style.cssText = `left: ${pGutterX - 2}px; top: ${pStartY - 2}px; width: 0px; height: ${pEndY - pStartY + 4}px; ${getAnim(0.7)}`;
+                    document.getElementById('purp-seg-3').style.cssText = `left: ${pEndX + 12}px; top: ${pEndY - 2}px; width: ${pGutterX - pEndX - 12}px; height: 0px; ${getAnim(0.8)}`;
+                    document.getElementById('purp-arrow').style.cssText = `left: ${pEndX + 2}px; top: ${pEndY - 6}px; ${getAnim(0.9)}`;
                 }
             }
         }
-        window.addEventListener('resize', drawFlowLines);
-        window.onload = function() { setTimeout(drawFlowLines, 100); setTimeout(drawFlowLines, 500); };
+        
+        window.addEventListener('resize', () => drawFlowLines(false));
+        window.onload = function() { setTimeout(() => drawFlowLines(false), 100); setTimeout(() => drawFlowLines(false), 500); };
     </script>
 </body>
 </html>
