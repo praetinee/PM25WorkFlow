@@ -60,7 +60,7 @@
         #main-flow-container.focus-active .flow-path:not(.focused) { opacity: 0.25; filter: grayscale(80%); }
 
         /* Animation */
-        .line-v { animation: drawDown 0.8s ease-out forwards; transform-origin: top; }
+        .line-v.anim { animation: drawDown 0.8s ease-out forwards; transform-origin: top; }
         .draw-fade { animation: fadeInAnim 0.8s ease-out forwards; opacity: 0; }
         @keyframes drawDown { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
         @keyframes fadeInAnim { from { opacity: 0; } to { opacity: 1; } }
@@ -79,14 +79,12 @@
 </head>
 <body class="antialiased relative">
     
-    <!-- ปุ่มสลับ Dark Mode -->
     <button onclick="toggleDarkMode()" class="fixed top-6 right-[170px] z-[9999] flex items-center justify-center bg-white border border-gray-200 text-gray-700 w-10 h-10 rounded-full shadow-sm hover:bg-gray-100 hover:text-gray-900 transition-all print:hidden cursor-pointer" data-html2canvas-ignore="true">
         <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
     </button>
 
-    <!-- ปุ่ม Workspace -->
     <a href="https://praetinee.github.io/JanWorkspace/" class="fixed top-6 right-6 z-[9999] flex items-center gap-2 bg-[#f8fafc] border border-gray-200 text-gray-700 px-4 py-2 rounded-xl shadow-sm hover:bg-gray-100 hover:text-gray-900 transition-all font-medium no-underline print:hidden cursor-pointer" style="font-family: 'Sarabun', sans-serif;" data-html2canvas-ignore="true">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -130,40 +128,39 @@
                             </div>
                             <span class="text-blue-900 font-bold text-xl pr-2 baseline-fix-inline">ปรึกษาออนไลน์</span>
                         </div>
-                        <div class="line-v h-6"></div><div class="arrow-down"></div>
+                        <div class="line-v anim h-6"></div><div class="arrow-down"></div>
                         
                         <div class="bg-blue-50 border border-blue-200 rounded-full px-6 py-3 shadow-sm text-center w-fit max-w-[90%] z-10">
                             <p class="text-blue-900 font-bold text-[16px] leading-snug card-text baseline-fix">ผ่านระบบหมอพร้อม/<br>telemedicine ของโรงพยาบาล</p>
                         </div>
-                        <div class="line-v h-6"></div><div class="arrow-down"></div>
+                        <div class="line-v anim h-6"></div><div class="arrow-down"></div>
                         
                         <div class="bg-blue-200 border border-blue-300 rounded-full px-8 py-2 shadow-sm text-center w-fit z-10">
                             <p class="text-blue-900 font-bold text-[16px] baseline-fix">ทำการคัดกรอง</p>
                         </div>
-                        <div class="line-v h-6 mb-0"></div>
+                        <div class="line-v anim h-6 mb-0"></div>
                         
-                        <!-- โครงสร้างแยกเส้นซ้าย-ขวาแบบสมบูรณ์ -->
                         <div class="w-[90%] flex h-[3px]">
                             <div class="flex-1 relative"><div class="absolute top-0 left-[50%] right-0 h-[3px] bg-line draw-fade"></div></div>
                             <div class="flex-1 relative"><div class="absolute top-0 left-0 right-[50%] h-[3px] bg-line draw-fade"></div></div>
                         </div>
                         <div class="w-[90%] flex items-stretch">
                             <div class="flex-1 flex flex-col items-center px-2">
-                                <div class="line-v h-4 mt-0 mb-1"></div>
+                                <div class="line-v anim h-4 mt-0 mb-1"></div>
                                 <div class="bg-green-50 border-[3px] border-green-600 rounded-[1.5rem] py-2 px-1 shadow-sm text-center w-full z-10">
                                     <p class="text-green-800 font-bold text-[14px] leading-tight card-text baseline-fix">ไม่เข้าข่าย/<br>อาการเล็กน้อย</p>
                                 </div>
-                                <div class="line-v h-4 my-1"></div>
+                                <div class="line-v anim h-4 my-1"></div>
                                 <div class="bg-white border-2 border-green-500 rounded-lg p-2 shadow-sm text-center w-full flex-grow z-10 min-h-[50px] flex items-center justify-center">
                                     <p class="text-green-700 font-bold text-[14px] leading-snug card-text baseline-fix">ให้คำแนะนำ<br>การปฏิบัติตัว<br>และส่งต่อ<br>ทีม 3 หมอ</p>
                                 </div>
                             </div>
                             <div class="flex-1 flex flex-col items-center px-2">
-                                <div class="line-v h-4 mt-0 mb-1"></div>
+                                <div class="line-v anim h-4 mt-0 mb-1"></div>
                                 <div class="bg-emerald-200 border border-emerald-500 rounded-[1.5rem] py-2 px-1 shadow-sm text-center w-full z-10">
                                     <p class="text-emerald-900 font-bold text-[14px] leading-tight card-text baseline-fix">เข้าข่าย<br>มีอาการที่สงสัย</p>
                                 </div>
-                                <div class="line-v h-4 my-1"></div>
+                                <div class="line-v anim h-4 my-1"></div>
                                 <div id="suspect-container" class="bg-emerald-100 border border-emerald-200 rounded-lg p-2 shadow-sm text-left w-full flex-grow relative z-10">
                                     <p class="text-emerald-900 font-bold text-[13px] leading-snug mb-2 card-text baseline-fix">1. ส่งต่อเข้ารับบริการ<br>ที่รพ./รพ.สต./PCU หนองหาร</p>
                                     <div id="red-source" class="bg-red-200 text-red-900 border border-red-400 px-2 py-1 rounded text-[13px] font-bold leading-snug inline-block shadow-sm relative z-[110]">
@@ -186,7 +183,7 @@
                                     </div>
                                     <h3 class="text-pink-900 font-bold text-[16px] leading-tight text-center pr-2 baseline-fix whitespace-nowrap">เข้ารับบริการ<br>ที่รพ./รพ.สต./PCU หนองหาร</h3>
                                 </div>
-                                <div class="line-v flex-grow min-h-[40px] mt-0 mb-0 w-[3px]"></div>
+                                <div class="line-v anim flex-grow min-h-[40px] mt-0 mb-0 w-[3px]"></div>
                             </div>
 
                             <!-- Col 3 -->
@@ -197,54 +194,49 @@
                                     </div>
                                     <h3 class="text-purple-900 font-bold text-xl pr-2 text-center baseline-fix-inline whitespace-nowrap">การเฝ้าระวัง</h3>
                                 </div>
-                                <div class="line-v h-6 mb-0 mt-0"></div>
+                                <div class="line-v anim h-6 mb-0 mt-0"></div>
                                 
-                                <!-- Inner Split -->
                                 <div class="w-[90%] flex h-[3px]">
                                     <div class="flex-1 relative"><div class="absolute top-0 left-[50%] right-0 h-[3px] bg-line draw-fade"></div></div>
                                     <div class="flex-1 relative"><div class="absolute top-0 left-0 right-[50%] h-[3px] bg-line draw-fade"></div></div>
                                 </div>
                                 <div class="w-[90%] flex items-stretch">
                                     <div class="flex-1 flex flex-col items-center px-1">
-                                        <div class="line-v h-4 mt-0 mb-1"></div>
+                                        <div class="line-v anim h-4 mt-0 mb-1"></div>
                                         <div class="bg-purple-100 border-2 border-purple-300 rounded-xl p-2 shadow-sm text-center w-full h-full flex justify-center items-center">
                                             <p class="text-purple-900 font-bold text-[12px] leading-snug card-text baseline-fix">ดึง ICD-10 โรค<br>ที่เกี่ยวข้องกับการ<br>สัมผัส PM2.5</p>
                                         </div>
-                                        <div class="line-v flex-grow min-h-[20px] mt-1 mb-0 w-[3px]"></div>
+                                        <div class="line-v anim flex-grow min-h-[20px] mt-1 mb-0 w-[3px]"></div>
                                     </div>
                                     <div class="flex-1 flex flex-col items-center px-1">
-                                        <div class="line-v h-4 mt-0 mb-1"></div>
+                                        <div class="line-v anim h-4 mt-0 mb-1"></div>
                                         <div class="bg-purple-100 border-2 border-purple-300 rounded-xl p-2 shadow-sm text-center w-full h-full flex justify-center items-center">
                                             <p class="text-purple-900 font-bold text-[12px] leading-snug card-text baseline-fix">หน่วยงานที่เกี่ยวข้อง<br>(OPD, ER และ<br>PCU หนองหาร)<br>แจ้งข้อมูลผ่าน GG sheets</p>
                                         </div>
-                                        <div class="line-v flex-grow min-h-[20px] mt-1 mb-0 w-[3px]"></div>
+                                        <div class="line-v anim flex-grow min-h-[20px] mt-1 mb-0 w-[3px]"></div>
                                     </div>
                                 </div>
-                                <!-- Inner Merge -->
                                 <div class="w-[90%] flex h-[3px]">
                                     <div class="flex-1 relative"><div class="absolute top-0 left-[50%] right-0 h-[3px] bg-line draw-fade"></div></div>
                                     <div class="flex-1 relative"><div class="absolute top-0 left-0 right-[50%] h-[3px] bg-line draw-fade"></div></div>
                                 </div>
-                                <div class="line-v flex-grow min-h-[20px] w-[3px] mt-0 mb-0"></div>
+                                <div class="line-v anim flex-grow min-h-[20px] w-[3px] mt-0 mb-0"></div>
                             </div>
                         </div>
                         
-                        <!-- Grand Merge -->
                         <div class="w-[95%] flex h-[3px]">
                             <div class="flex-1 relative"><div class="absolute top-0 left-[50%] right-0 h-[3px] bg-line draw-fade"></div></div>
                             <div class="flex-1 relative"><div class="absolute top-0 left-0 right-[50%] h-[3px] bg-line draw-fade"></div></div>
                         </div>
                         
-                        <div class="line-v h-6 mt-0 relative z-0"></div>
+                        <div class="line-v anim h-6 mt-0 relative z-0"></div>
                         <div class="arrow-down relative z-0"></div>
                         
-                        <!-- ซักประวัติ -->
                         <div class="bg-pink-100 border border-pink-300 rounded-[2rem] px-5 py-3 shadow-sm text-center w-[85%] z-10">
                             <p class="text-pink-900 font-bold text-[15px] leading-snug card-text baseline-fix">เจ้าหน้าที่ซักประวัติ/อาการเบื้องต้น<br>และลงแบบคัดกรองสอบสวนโรคที่เกิดจาก PM2.5</p>
                         </div>
-                        <div class="line-v h-6 mb-0 relative z-0"></div>
+                        <div class="line-v anim h-6 mb-0 relative z-0"></div>
                         
-                        <!-- 3-Way Split Header -->
                         <div class="w-[95%] flex h-[3px]">
                             <div class="flex-[1] relative"><div class="absolute top-0 left-[50%] right-0 h-[3px] bg-line draw-fade"></div></div>
                             <div class="flex-[1.2] relative"><div class="absolute top-0 left-0 right-0 h-[3px] bg-line draw-fade"></div></div>
@@ -254,11 +246,11 @@
                         <div class="w-[95%] flex items-stretch relative z-10">
                             <!-- Left -->
                             <div class="flex-[1] flex flex-col items-center px-2">
-                                <div class="line-v h-4 mt-0 mb-1"></div>
+                                <div class="line-v anim h-4 mt-0 mb-1"></div>
                                 <div class="bg-white border-[3px] border-blue-800 rounded-[1.5rem] py-2 px-1 shadow-sm text-center w-full z-10 h-[60px] flex items-center justify-center">
                                     <p class="text-blue-900 font-bold text-[13px] leading-tight card-text baseline-fix">กรณี<br>ไม่เข้าข่าย</p>
                                 </div>
-                                <div class="line-v h-4 my-1"></div>
+                                <div class="line-v anim h-4 my-1"></div>
                                 <div class="bg-white border-2 border-blue-800 rounded-lg p-2 shadow-sm text-center w-full flex-grow z-10 min-h-[50px] flex flex-col items-center justify-center">
                                     <p class="text-blue-900 font-bold text-[13px] leading-snug card-text baseline-fix">ส่งตรวจคลินิก<br>ตามอาการของโรค</p>
                                 </div>
@@ -266,35 +258,34 @@
                             
                             <!-- Middle -->
                             <div class="flex-[1.2] flex flex-col items-center px-2">
-                                <div class="line-v h-4 mt-0 mb-1"></div>
+                                <div class="line-v anim h-4 mt-0 mb-1"></div>
                                 <div class="bg-orange-200 border-[3px] border-orange-400 rounded-[1.5rem] py-2 px-1 shadow-sm text-center w-full z-10 h-[60px] flex items-center justify-center shrink-0">
                                     <p class="text-orange-900 font-bold text-[13px] leading-tight card-text baseline-fix">เข้าข่าย<br>อาการเล็กน้อย<br>/ปานกลาง</p>
                                 </div>
-                                <!-- เติมเส้นให้ยืดลงมา -->
-                                <div class="line-v flex-grow mt-1 mb-0 w-[3px]"></div>
+                                <div class="line-v anim flex-grow mt-1 mb-0 w-[3px]"></div>
                             </div>
                             
                             <!-- Right -->
                             <div class="flex-[1] flex flex-col items-center px-2 relative">
-                                <div class="line-v h-4 mt-0 mb-1"></div>
+                                <div class="line-v anim h-4 mt-0 mb-1"></div>
                                 <div id="red-target" class="w-full relative z-[110] h-[60px]">
                                     <div class="absolute -top-3 w-full h-[1px]"></div>
                                     <div class="bg-red-200 border-[3px] border-red-500 rounded-full py-2 px-1 shadow-sm text-center w-full h-full flex items-center justify-center">
                                         <p class="text-red-900 font-bold text-[13px] leading-tight card-text baseline-fix">ผู้ป่วย<br>อาการรุนแรง</p>
                                     </div>
                                 </div>
-                                <div class="line-v h-4 my-1"></div>
+                                <div class="line-v anim h-4 my-1"></div>
                                 <div class="bg-red-500 rounded-md p-2 shadow-sm text-center w-[90%] z-10 flex flex-col justify-center">
                                     <p class="text-white font-bold text-[13px] leading-tight card-text baseline-fix">ส่งเข้า<br>ห้องฉุกเฉิน</p>
                                 </div>
-                                <div class="line-v h-4 my-1"></div>
+                                <div class="line-v anim h-4 my-1"></div>
                                 <div id="er-refer-box" class="bg-red-500 rounded-md p-2 shadow-sm text-center w-[90%] flex items-center justify-center z-10 min-h-[30px] relative">
                                     <p class="text-white font-bold text-[13px] leading-tight baseline-fix">Admit หรือ Refer</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="line-v h-14 relative z-0"></div>
+                        <div class="line-v anim h-14 relative z-0"></div>
                         <div class="arrow-down relative z-0"></div>
 
                         <!-- ================= CLINIC SECTION ================= -->
@@ -304,23 +295,21 @@
                                 <p class="text-orange-800 font-bold text-[13px] baseline-fix">(กรณี รพ.สต./PCU หนองหาร ให้ส่งต่อ รพ.)</p>
                             </div>
                             
-                            <div class="line-v h-6"></div>
+                            <div class="line-v anim h-6"></div>
                             
                             <div class="bg-orange-50 border-[2px] border-orange-200 rounded-lg px-6 py-3 shadow-sm text-center w-[85%] z-10">
                                 <p class="text-orange-900 font-bold text-[15px] leading-snug card-text baseline-fix">ซักประวัติ / ตรวจร่างกาย /<br>ตรวจทางห้องปฏิบัติการ<br>โดยแพทย์ / สหวิชาชีพ</p>
                             </div>
                             
-                            <div class="line-v h-6"></div>
+                            <div class="line-v anim h-6"></div>
                             
                             <div class="bg-orange-200 border-[2px] border-orange-300 rounded-lg px-10 py-2 shadow-sm text-center w-fit z-10">
                                 <p class="text-orange-900 font-bold text-[16px] baseline-fix">วางแผนการรักษา</p>
                             </div>
                             
-                            <div class="line-v h-6 mb-0"></div>
+                            <div class="line-v anim h-6 mb-0"></div>
                             
-                            <!-- Clinic 3-Way Split -->
                             <div class="w-[90%] flex flex-col items-center relative z-10">
-                                
                                 <div class="w-full flex h-[3px]">
                                     <div class="flex-[1] relative"><div class="absolute top-0 left-[50%] right-0 h-[3px] bg-line draw-fade"></div></div>
                                     <div class="flex-[1] relative"><div class="absolute top-0 left-0 right-0 h-[3px] bg-line draw-fade"></div></div>
@@ -329,25 +318,25 @@
                                 
                                 <div class="w-full flex items-stretch">
                                     <div class="flex-1 flex flex-col items-center px-2">
-                                        <div class="line-v h-4 mt-0 mb-1"></div>
+                                        <div class="line-v anim h-4 mt-0 mb-1"></div>
                                         <div class="bg-orange-200 border-[2px] border-orange-300 rounded-md p-2 shadow-sm text-center w-full flex-grow flex items-center justify-center relative z-10 min-h-[40px]">
                                             <p class="text-orange-900 font-bold text-[14px] baseline-fix">ให้ยากลับบ้าน</p>
                                         </div>
-                                        <div class="line-v flex-grow min-h-[20px] mt-1 mb-0 w-[3px]"></div>
+                                        <div class="line-v anim flex-grow min-h-[20px] mt-1 mb-0 w-[3px]"></div>
                                     </div>
                                     <div class="flex-1 flex flex-col items-center px-2">
-                                        <div class="line-v h-4 mt-0 mb-1"></div>
+                                        <div class="line-v anim h-4 mt-0 mb-1"></div>
                                         <div class="bg-orange-200 border-[2px] border-orange-300 rounded-md p-2 shadow-sm text-center w-full flex-grow flex items-center justify-center relative z-10 min-h-[40px]">
                                             <p class="text-orange-900 font-bold text-[14px] leading-tight baseline-fix">Admit<br>ให้การรักษา</p>
                                         </div>
-                                        <div class="line-v flex-grow min-h-[20px] mt-1 mb-0 w-[3px]"></div>
+                                        <div class="line-v anim flex-grow min-h-[20px] mt-1 mb-0 w-[3px]"></div>
                                     </div>
                                     <div class="flex-1 flex flex-col items-center px-2">
-                                        <div class="line-v h-4 mt-0 mb-1"></div>
+                                        <div class="line-v anim h-4 mt-0 mb-1"></div>
                                         <div class="bg-orange-200 border-[2px] border-orange-300 rounded-md p-2 shadow-sm text-center w-full flex-grow flex items-center justify-center relative z-10 min-h-[40px]">
                                             <p class="text-orange-900 font-bold text-[14px] baseline-fix">ส่ง REFER</p>
                                         </div>
-                                        <div class="line-v flex-grow min-h-[20px] mt-1 mb-0 w-[3px]"></div>
+                                        <div class="line-v anim flex-grow min-h-[20px] mt-1 mb-0 w-[3px]"></div>
                                     </div>
                                 </div>
                                 
@@ -357,7 +346,7 @@
                                     <div class="flex-[1] relative"><div class="absolute top-0 left-0 right-[50%] h-[3px] bg-line draw-fade"></div></div>
                                 </div>
                                 
-                                <div class="line-v h-8 mt-0 relative z-0"></div>
+                                <div class="line-v anim h-8 mt-0 relative z-0"></div>
                                 <div class="arrow-down relative z-0"></div>
                                 
                                 <div class="w-full bg-blue-100 border-2 border-blue-300 rounded-xl p-4 shadow-md mt-1 relative z-10">
@@ -371,7 +360,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="line-v h-8 relative z-0"></div>
+                                <div class="line-v anim h-8 relative z-0"></div>
                                 <div class="arrow-down relative z-0"></div>
                                 
                                 <div id="disease-control-box" class="w-full bg-purple-100 border-[2px] border-purple-400 rounded-xl p-4 shadow-md mt-1 relative z-10 text-center flex flex-col justify-center">
@@ -379,7 +368,6 @@
                                         ทีมคลินิกมลพิษ แจ้งข้อมูลแก่ ควบคุมโรค (เพื่อซักประวัติ+รายงาน สสจ. ทราบ)<br>
                                     </p>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -431,6 +419,7 @@
             }
         }
 
+        // ====== ฟังก์ชันบันทึกภาพฉบับแก้ไขสมบูรณ์ ======
         async function downloadImage() {
             const btn = document.querySelector('button[onclick="downloadImage()"]');
             const originalContent = btn.innerHTML;
@@ -438,67 +427,84 @@
             
             await document.fonts.ready;
             
+            // หน้าจอโหลดดิ้ง
             const overlay = document.createElement('div');
-            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:#ffffff;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;';
-            overlay.innerHTML = `
-                <div style="font-family: 'Sarabun', sans-serif; text-align: center;">
-                    <svg class="animate-spin mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-                    <h2 style="font-size: 1.5rem; font-weight: 700; color: #1e293b;">กำลังสร้างรูปภาพ...</h2>
-                </div>
-            `;
+            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:#ffffff;z-index:99999;display:flex;align-items:center;justify-content:center;';
+            overlay.innerHTML = '<h2 style="font-family:Sarabun; font-size: 1.5rem; color:#1e293b; font-weight:bold;">กำลังสร้างรูปภาพ กรุณารอสักครู่...</h2>';
             document.body.appendChild(overlay);
             
             const panContainer = document.getElementById('pan-container');
-            const canvasBox = document.querySelector('#pan-container > div');
+            const canvasBox = panContainer.querySelector('div');
             const captureArea = document.getElementById('capture-area');
 
-            const currentBg = canvasBox.style.backgroundColor;
-            const oldScrollLeft = panContainer.scrollLeft;
-            const oldScrollTop = panContainer.scrollTop;
-            
-            canvasBox.style.backgroundColor = '#ffffff';
+            // 1. เก็บค่าเดิมของหน้าจอเอาไว้
+            const origScrollLeft = panContainer.scrollLeft;
+            const origScrollTop = panContainer.scrollTop;
+            const origOverflow = panContainer.style.overflow;
+            const origHeight = panContainer.style.height;
+            const origBg = canvasBox.style.backgroundColor;
+
+            // 2. ปลดล็อก Container ให้ html2canvas มองเห็นทั้งหมด (สำคัญมาก)
             panContainer.scrollLeft = 0;
             panContainer.scrollTop = 0;
-            window.scrollTo(0, 0); 
+            panContainer.style.overflow = 'visible';
+            panContainer.style.height = 'auto';
+            canvasBox.style.backgroundColor = '#ffffff';
 
-            const noAnimStyle = document.createElement('style');
-            noAnimStyle.innerHTML = `.pop-in, .draw-fade { opacity: 1 !important; animation: none !important; transform: none !important; }`;
-            document.head.appendChild(noAnimStyle);
+            // 3. ถอดคลาสแอนิเมชันออกทั้งหมด เพื่อไม่ให้ภาพโปร่งแสง (Opacity: 0)
+            const animatedEls = document.querySelectorAll('.pop-in, .draw-fade, .line-v');
+            animatedEls.forEach(el => {
+                el.dataset.origClass = el.className; // จำคลาสเดิมไว้
+                el.classList.remove('pop-in', 'draw-fade', 'anim');
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+                el.style.animation = 'none';
+            });
 
+            // วาดเส้นแดง/ม่วง แบบไม่ใช้แอนิเมชัน
             drawFlowLines(true);
             
+            // 4. รอให้เบราว์เซอร์เตรียม DOM ให้เสร็จก่อนถ่าย
             setTimeout(() => {
                 html2canvas(captureArea, {
                     scale: 3, 
                     backgroundColor: "#ffffff", 
                     useCORS: true, 
-                    scrollX: 0, 
-                    scrollY: 0, 
-                    windowWidth: 1280, 
-                    logging: false
+                    logging: false,
+                    windowWidth: 1280
                 }).then(canvas => {
-                    document.body.removeChild(overlay); 
-                    document.head.removeChild(noAnimStyle);
-                    canvasBox.style.backgroundColor = currentBg;
-                    panContainer.scrollLeft = oldScrollLeft;
-                    panContainer.scrollTop = oldScrollTop;
+                    // คืนค่าหน้าจอให้เหมือนเดิม
+                    panContainer.style.overflow = origOverflow;
+                    panContainer.style.height = origHeight;
+                    canvasBox.style.backgroundColor = origBg;
+                    panContainer.scrollLeft = origScrollLeft;
+                    panContainer.scrollTop = origScrollTop;
                     
+                    animatedEls.forEach(el => {
+                        if (el.dataset.origClass) {
+                            el.className = el.dataset.origClass;
+                            el.style.opacity = '';
+                            el.style.transform = '';
+                            el.style.animation = '';
+                        }
+                    });
+                    
+                    drawFlowLines(false);
+                    document.body.removeChild(overlay);
+                    btn.innerHTML = originalContent;
+
+                    // ทริกเกอร์โหลดภาพ
                     const link = document.createElement('a'); 
                     link.download = 'PM25_Flow.png'; 
                     link.href = canvas.toDataURL('image/png', 1.0); 
                     link.click();
-                    btn.innerHTML = originalContent;
                 }).catch(err => {
                     console.error(err); 
-                    document.body.removeChild(overlay); 
-                    if(document.head.contains(noAnimStyle)) document.head.removeChild(noAnimStyle);
-                    canvasBox.style.backgroundColor = currentBg;
-                    panContainer.scrollLeft = oldScrollLeft;
-                    panContainer.scrollTop = oldScrollTop;
+                    document.body.removeChild(overlay);
                     btn.innerHTML = originalContent; 
-                    alert("เกิดข้อผิดพลาดในการบันทึกรูปภาพ กรุณาลองใหม่อีกครั้ง");
+                    alert("เกิดข้อผิดพลาดในการบันทึกรูปภาพ");
                 });
-            }, 500); 
+            }, 600); 
         }
 
         function drawFlowLines(isCapture = false) {
@@ -512,7 +518,8 @@
                     return { top: rect.top - contRect.top, bottom: rect.bottom - contRect.top, left: rect.left - contRect.left, right: rect.right - contRect.left, width: rect.width, height: rect.height };
                 };
 
-                const getAnim = (delay) => isCapture ? 'opacity: 1;' : `opacity: 0; animation: popInAnim 0.5s ease ${delay}s forwards;`;
+                // ถ้าอยู่ในโหมด capture จะบังคับให้ opacity 1 เสมอ ไม่งั้นเส้นจะล่องหน
+                const getAnim = (delay) => isCapture ? 'opacity: 1 !important; animation: none !important;' : `opacity: 0; animation: popInAnim 0.5s ease ${delay}s forwards;`;
 
                 const redSrc = document.getElementById('red-source');
                 const redTgt = document.getElementById('red-target');
